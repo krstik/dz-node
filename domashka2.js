@@ -13,20 +13,11 @@ program
 
 const inputDir = './' + program.inpdir;
 const outputDir = './' + program.outdir;
+let dirNames = [];
 
 async function createNewDir (directoryName)  {
   // Creating output folder(if exist delete)
   //if (fse.ensureDirSync(directoryName)) {
-    fs.exists(directoryName, (exists)=>{
-      if (exists) {
-        if (directoryName==outputDir){
-          fse.remove(directoryName, err => {
-            if (err) return console.error(err)
-            console.log('Output exist and removed!')
-          })
-        }
-      }
-  })
     fs.mkdir(directoryName, (folder) => {
       return folder
     })
@@ -89,6 +80,15 @@ function copyItem (item, localBase) {
 
 async function main () {
     try {
+      // fs.exists(outputDir,exists=>{
+      //   if (exists)
+      //   {
+      //     fse.remove(outputDir, err => {
+      //       if (err) return console.error(err)
+      //       console.log('Warning Output folder exists and will be removed')
+      //     })
+      //   }
+      // })
       await createNewDir(outputDir);
       await readDir(inputDir, 0);
     } catch (error) {
